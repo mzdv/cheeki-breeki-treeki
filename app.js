@@ -1,16 +1,30 @@
-var treeTracker = {
+var Tree = function(nodes) {
+    for(i = 0; i < nodes.length; i++) {
+        this.addNode(nodes[i]);
+    }
+
+    //var treeNodes = [];
+    //var treeTracker = {
+    //    currentId: 1,
+    //    numberOfNodes: 0
+    //}
+
+    //TO-DO: getters and setters
+};
+
+Tree.prototype.treeTracker = {
     currentId: 1,
     numberOfNodes: 0
 };
 
-var treeNodes = [];
+Tree.prototype.treeNodes = [];
 
-var addNode = function(value) {
-    var fatherPosition = Math.floor(treeTracker.currentId / 2) - 1;
-    var father = treeNodes[fatherPosition] ? treeNodes[fatherPosition] : null;
+Tree.prototype.addNode = function(value) {
+    var fatherPosition = Math.floor(this.treeTracker.currentId / 2) - 1;
+    var father = this.treeNodes[fatherPosition] ? this.treeNodes[fatherPosition] : null;
 
     var newNode = {
-        id: treeTracker.currentId++,
+        id: this.treeTracker.currentId++,
         value: value,
         previousNode: null,
         leftNode: null,
@@ -29,12 +43,15 @@ var addNode = function(value) {
 
         father.freeNodes--;
     }
-        treeNodes.push(newNode);
+        this.treeNodes.push(newNode);
+        this.treeTracker.numberOfNodes++;
         // this chain of ifs is ugly as hell
 };
 
-addNode(5);
-addNode(3);
-addNode(2);
+Tree.prototype.traverseTree = function(startingNode) {
+    //TO-DO
+};
 
-console.log(treeNodes);
+var t = new Tree([3, 4, 5]);
+t.addNode(6);
+console.log(t.treeNodes);
