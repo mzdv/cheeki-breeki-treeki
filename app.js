@@ -40,11 +40,27 @@ Tree.prototype.addNode = function(value) {
         // this chain of ifs is ugly as hell
 };
 
-Tree.prototype.traverseTree = function(startingNodeId) {
+Tree.prototype.prefixTraverseTree = function(startingNodeId) {
     if(typeof this.treeNodes[startingNodeId-1] !== 'undefined') {
         console.log(this.treeNodes[startingNodeId-1].value);
-        this.traverseTree(this.treeNodes[startingNodeId-1].leftNode);
-        this.traverseTree(this.treeNodes[startingNodeId-1].rightNode);
+        this.prefixTraverseTree(this.treeNodes[startingNodeId-1].leftNode);
+        this.prefixTraverseTree(this.treeNodes[startingNodeId-1].rightNode);
+    }
+};
+
+Tree.prototype.postfixTraverseTree = function(startingNodeId) {
+    if(typeof this.treeNodes[startingNodeId-1] !== 'undefined') {
+        this.postfixTraverseTree(this.treeNodes[startingNodeId-1].leftNode);
+        this.postfixTraverseTree(this.treeNodes[startingNodeId-1].rightNode);
+        console.log(this.treeNodes[startingNodeId-1].value);
+    }
+};
+
+Tree.prototype.infixTraverseTree = function(startingNodeId) {
+    if(typeof this.treeNodes[startingNodeId-1] !== 'undefined') {
+        this.infixTraverseTree(this.treeNodes[startingNodeId-1].leftNode);
+        console.log(this.treeNodes[startingNodeId-1].value);
+        this.infixTraverseTree(this.treeNodes[startingNodeId-1].rightNode);
     }
 };
 
@@ -52,4 +68,8 @@ var t = new Tree([3, 4, 5]);
 t.addNode(6);
 
 console.log(t.treeNodes);
-t.traverseTree(1);
+t.prefixTraverseTree(1);
+console.log('\n');
+t.infixTraverseTree(1);
+console.log('\n');
+t.postfixTraverseTree(1);
