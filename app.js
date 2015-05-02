@@ -2,14 +2,6 @@ var Tree = function(nodes) {
     for(i = 0; i < nodes.length; i++) {
         this.addNode(nodes[i]);
     }
-
-    //var treeNodes = [];
-    //var treeTracker = {
-    //    currentId: 1,
-    //    numberOfNodes: 0
-    //}
-
-    //TO-DO: getters and setters
 };
 
 Tree.prototype.treeTracker = {
@@ -48,10 +40,16 @@ Tree.prototype.addNode = function(value) {
         // this chain of ifs is ugly as hell
 };
 
-Tree.prototype.traverseTree = function(startingNode) {
-    //TO-DO
+Tree.prototype.traverseTree = function(startingNodeId) {
+    if(typeof this.treeNodes[startingNodeId-1] !== 'undefined') {
+        console.log(this.treeNodes[startingNodeId-1].value);
+        this.traverseTree(this.treeNodes[startingNodeId-1].leftNode);
+        this.traverseTree(this.treeNodes[startingNodeId-1].rightNode);
+    }
 };
 
 var t = new Tree([3, 4, 5]);
 t.addNode(6);
+
 console.log(t.treeNodes);
+t.traverseTree(1);
